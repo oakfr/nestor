@@ -54,3 +54,14 @@ class BusChecker:
     def lines_times_sorted (self):
         return [self.next_bus[x] for x in self.lines_names_sorted()]
 
+
+def main():
+    b = BusChecker()
+    b.refresh()
+    print(b.to_string())
+
+if __name__ == "__main__":
+
+    main()
+
+
