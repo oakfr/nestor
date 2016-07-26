@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from transport import BusChecker
+from weather import Weather
 import Tkinter as tk
 import time
 import functools
@@ -33,18 +34,18 @@ def Draw(root, bus_checker):
     label_time_of_day.config(bg='white',justify='right')
 
     # place objects on a grid
+    label_time_of_day.grid(row=0,columnspan=2)
     for (label1,label2,k) in zip(label_lines_names,label_lines_times,range(n_lines)):
         print('setting label %d' % k)
-        label1.grid(row=k)
-        label2.grid(row=k,column=1)
-    label_time_of_day.grid(row=4,column=0)
+        label1.grid(row=k+2,column=0)
+        label2.grid(row=k+2,column=1)
 
     objects = (label_time_of_day, label_lines_times)
 
     return objects
 
 
-def Refresher(root, bus_checker, objects):
+def Refresher(root, bus_checker, weather, objects):
     """ refresh function. is called repeatedly. """
 
     print('refreshing at %s...' % time.asctime())
@@ -54,8 +55,12 @@ def Refresher(root, bus_checker, objects):
 
     label_time_of_day.configure(text=time.strftime('%A %d %Y %H:%M'))
 
+    # refresh transportation data
     bus_checker.refresh()
     times_sorted = bus_checker.lines_times_sorted()
+
+    # refresh weather data
+    weather.refresh()
 
     # update text for each bus line
     for v,k in zip(times_sorted, range(len(times_sorted))):
@@ -69,17 +74,22 @@ def Refresher(root, bus_checker, objects):
         label_lines_times[k].configure(text=vt)
 
     # call itself
-    root.after(1000, functools.partial(Refresher,root,bus_checker,objects)) # every second...
+    root.after(1000, functools.partial(Refresher,root,bus_checker,weather,objects)) # every second...
     root.geometry("500x500")
 
 
 def main():
+    # transport schedule
     bus_checker = BusChecker()
     bus_checker.refresh()
 
+    # weather
+    weather = Weather()
+    weather.refresh()
+
     root = tk.Tk()
     objects = Draw(root, bus_checker)
-    Refresher(root, bus_checker, objects)
+    Refresher(root, bus_checker, weather, objects)
     root.mainloop()
 
 
