@@ -7,6 +7,7 @@ class BusChecker:
         self.urls = {\
                 'B_72':'http://www.ratp.fr/horaires/fr/ratp/bus/prochains_passages/PP/B72/72_94_107/A',\
                 'B_22':'http://www.ratp.fr/horaires/fr/ratp/bus/prochains_passages/PP/B22/22_31/A',\
+                'B_PC1':'http://www.ratp.fr/horaires/fr/ratp/bus/prochains_passages/PP/BPC1/PC1_4042_4074/A',\
                 'M_10':'http://www.ratp.fr/horaires/fr/ratp/metro/prochains_passages/PP/chardon+lagache/10/A',\
                 'M_9' :'http://www.ratp.fr/horaires/fr/ratp/metro/prochains_passages/PP/exelmans/9/A'}
         self.re_search = re.compile ('[0-9]+ mn')
