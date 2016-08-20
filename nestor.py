@@ -17,7 +17,7 @@ def Draw(root, bus_checker):
     # select font
     mfont = ("TkFixedFont",12)
     mfont = ("-*-lucidatypewriter-medium-r-*-*-*-140-*-*-*-*-*-*",12)
-    mfont = ("FixedSys", 24)
+    mfont = ("FixedSys", 34)
 
     # create the graphical objects
     label_lines_names = []
@@ -75,7 +75,7 @@ def Refresher(root, bus_checker, weather, objects):
 
     # call itself
     root.after(1000, functools.partial(Refresher,root,bus_checker,weather,objects)) # every second...
-    root.geometry("500x500")
+    root.geometry("1000x500")
 
 
 def main():
