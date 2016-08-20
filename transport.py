@@ -43,10 +43,13 @@ class BusChecker:
             html = response.read()
             times = re.findall (self.re_search,html)
             self.next_bus[k] = []
+            count=0
             for mtime in times:
                 stime = int(mtime.split(' ')[0])
                 self.next_bus[k].append (stime)
-
+                count += 1
+                if count == 2:
+                    break
 
     def lines_names_sorted (self):
         return sorted(self.next_bus.keys())

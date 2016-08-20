@@ -18,7 +18,7 @@ def Draw(root, bus_checker, images):
     # select font
     mfont = ("TkFixedFont",12)
     mfont = ("-*-lucidatypewriter-medium-r-*-*-*-140-*-*-*-*-*-*",12)
-    mfont = ("FixedSys", 34)
+    mfont = ("FixedSys", 50)
 
     # create the graphical objects
     label_lines_names = []
