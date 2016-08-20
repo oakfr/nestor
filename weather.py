@@ -8,8 +8,8 @@ class Weather:
         self.url = 'http://www.meteo-paris.com'
         self.ecart_reg = re.compile('Ecart saisonnier.*?([-0-9]+)', re.DOTALL)
         self.pluie_reg = re.compile('span class=\'pourcent\'>([0-9]+)')
-        self.temp_midi_reg = re.compile('-midi.*?([-0-9]+)<br', re.DOTALL)
-        self.temp_matin_reg = re.compile('Matin.*?([-0-9]+)<br', re.DOTALL)
+        self.temp_midi_reg = re.compile('-midi</div>.*?([-0-9]+)<br', re.DOTALL)
+        self.temp_matin_reg = re.compile('Matin</div>.*?([-0-9]+)<br', re.DOTALL)
         self.temp_soir_reg = re.compile('Soir.*?([-0-9]+)<br', re.DOTALL)
 
         self.ecart_saisonnier = -20
@@ -23,6 +23,10 @@ class Weather:
         # read data
         response = urllib2.urlopen (self.url)
         html = response.read()
+
+        # write to file for debugging
+        with open ('meteo.html','w') as fp:
+            fp.write (html)
 
         # scan for temperature difference
         d = re.findall (self.ecart_reg, html)
