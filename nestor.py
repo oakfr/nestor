@@ -75,8 +75,13 @@ def Refresher(root, bus_checker, weather, objects):
 
     # call itself
     root.after(1000, functools.partial(Refresher,root,bus_checker,weather,objects)) # every second...
-    root.geometry("1000x500")
 
+    # set to full screen
+    w, h = root.winfo_screenwidth(), root.winfo_screenheight()
+    root.attributes('-fullscreen', True)
+    root.geometry("%dx%d+0+0" % (w, h))
+    root.focus_set() # <-- move focus to this widget
+    root.bind("<Escape>", lambda e: e.widget.quit())
 
 def main():
     # transport schedule
