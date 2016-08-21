@@ -5,8 +5,12 @@ import Tkinter as tk
 import time
 import functools
 from PIL import ImageTk, Image
+import uinput
 
 
+def keypress():
+    device = uinput.Device([uinput.KEY_E])
+    device.emit_click(uinput.KEY_E)
 
 def Draw(root, bus_checker, images):
     """ draw function.  is called only once at startup. """
@@ -66,6 +70,9 @@ def Refresher(root, bus_checker, weather, objects):
     # refresh weather data
     weather.refresh()
 
+    # simulate key press to maintain screen on
+    keypress()
+
     # update text for each bus line
     for v,k in zip(times_sorted, range(len(times_sorted))):
         vt = ', '.join(['%d' % x for x in v])
@@ -91,7 +98,7 @@ def Refresher(root, bus_checker, weather, objects):
 def get_images (bus_checker):
     images = {}
     for k,_ in bus_checker.urls.iteritems():
-        images[k] = ImageTk.PhotoImage(Image.open('img/%s.png' % k))
+        images[k] = ImageTk.PhotoImage(Image.open('/home/koch/nestor/img/%s.png' % k))
     return images
 
 def main():

@@ -2,3 +2,23 @@ Author : Olivier Koch, olivier@olivierkoch.org
 
 Date : July 2016
 
+Dependencies
+------------------------------------------
+
+python-uinput
+
+
+Allowing user to write to /dev/uinput
+------------------------------------------
+create a new group uinput:
+sudo groupadd -f uinput
+add user to group:
+sudo gpasswd -a <username> uinput
+reboot!
+
+create new udev rule:
+create a file named /etc/udev/rules.d/99-input.rules
+insert the following line
+KERNEL=="uinput", GROUP="uinput", MODE="0660"
+reboot!
+
