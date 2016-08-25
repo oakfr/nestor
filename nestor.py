@@ -5,12 +5,13 @@ import Tkinter as tk
 import time
 import functools
 from PIL import ImageTk, Image
-import uinput
+#import uinput
 
 
 def keypress():
-    device = uinput.Device([uinput.KEY_E])
-    device.emit_click(uinput.KEY_E)
+    os.system('xte \'key S\'')
+    #device = uinput.Device([uinput.KEY_E])
+    #device.emit_click(uinput.KEY_E)
 
 def Draw(root, bus_checker, images):
     """ draw function.  is called only once at startup. """
