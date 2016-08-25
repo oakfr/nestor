@@ -8,8 +8,8 @@ Dependencies
 Pillow
 python-tk
 python-imaging-tk
-libudev-dev
-python-uinput
+xautomation
+
 
 Allowing user to write to /dev/uinput
 ------------------------------------------
