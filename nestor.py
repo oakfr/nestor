@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 from transport import BusChecker
 from weather import Weather
 import Tkinter as tk
@@ -12,6 +13,7 @@ def keypress():
     os.system('xte \'key S\'')
     #device = uinput.Device([uinput.KEY_E])
     #device.emit_click(uinput.KEY_E)
+
 
 def Draw(root, bus_checker, images):
     """ draw function.  is called only once at startup. """
@@ -92,7 +94,7 @@ def Refresher(root, bus_checker, weather, objects):
     label_lines_times = objects[1]
     label_weather_texts = objects[2]
 
-    label_time_of_day.configure(text=time.strftime('%A %d %Y    %H:%M'))
+    label_time_of_day.configure(text=time.strftime('%A %d %Y  %H:%M'))
 
     # refresh transportation data
     bus_checker.refresh()
@@ -102,7 +104,7 @@ def Refresher(root, bus_checker, weather, objects):
     weather.refresh()
 
     # simulate key press to maintain screen on
-    #keypress()
+    keypress()
 
     # update text for each bus line
     for v,k in zip(times_sorted, range(len(times_sorted))):
@@ -112,7 +114,6 @@ def Refresher(root, bus_checker, weather, objects):
         else:
             vt = ''
         vt = ' ' + vt.ljust(25)
-        print(vt)
         label_lines_times[k].configure(text=vt)
 
     # update text for weather
