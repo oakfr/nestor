@@ -8,6 +8,15 @@ import functools
 from PIL import ImageTk, Image
 #import uinput
 
+def day_english_to_french (strin):
+    strin = strin.replace('Monday','Lundi')
+    strin = strin.replace('Tuesday','Mardi')
+    strin = strin.replace('Wednesday','Mercredi')
+    strin = strin.replace('Thursday','Jeudi')
+    strin = strin.replace('Friday','Vendredi')
+    strin = strin.replace('Saturday','Samedi')
+    strin = strin.replace('Sunday','Dimanche')
+    return strin
 
 def keypress():
     os.system('xte \'key S\'')
@@ -63,7 +72,7 @@ def Draw(root, bus_checker, images):
         label.config(bg='white')
 
     # place objects on a grid
-    label_time_of_day.grid(row=0,columnspan=2)
+    label_time_of_day.grid(row=0,columnspan=4)
     for (label1,label2,image,k) in zip(label_lines_names,label_lines_times,label_lines_image,range(n_lines)):
         image.grid(row=k+2,column=0)
         label2.grid(row=k+2,column=1,sticky='W')
@@ -94,7 +103,9 @@ def Refresher(root, bus_checker, weather, objects):
     label_lines_times = objects[1]
     label_weather_texts = objects[2]
 
-    label_time_of_day.configure(text=time.strftime('%A %d %Y  %H:%M'))
+    time_of_day = time.strftime('%A %d %Y    %H:%M')
+    time_of_day = day_english_to_french (time_of_day)
+    label_time_of_day.configure(text=time_of_day)
 
     # refresh transportation data
     bus_checker.refresh()
@@ -121,7 +132,10 @@ def Refresher(root, bus_checker, weather, objects):
     label_weather_texts[0].configure(text=(' %d' + degree_sign) % weather.temp_matin)
     label_weather_texts[1].configure(text=(' %d' + degree_sign) % weather.temp_midi)
     label_weather_texts[2].configure(text=(' %d' + degree_sign) % weather.temp_soir)
-    label_weather_texts[3].configure(text=(' %d' + degree_sign) % weather.ecart_saisonnier)
+    if weather.ecart_saisonnier>=0:
+        label_weather_texts[3].configure(text=(' +%d' + degree_sign) % weather.ecart_saisonnier)
+    else:
+        label_weather_texts[3].configure(text=(' %d' + degree_sign) % weather.ecart_saisonnier)
     label_weather_texts[4].configure(text=(' %d%%') % weather.pluie)
 
 
