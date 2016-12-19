@@ -1,27 +1,29 @@
 Author : Olivier Koch, olivier@olivierkoch.org
-
 Date : July 2016
 
-Dependencies
-------------------------------------------
 
+DESCRIPTION
+------------------------------------------
+Nestor is an assistant that displays weather conditions and public transport live schedules on a screen.
+
+It is currently setup for buses an metros in Paris, but you can include your own source of data.
+
+
+INSTALLATION
+------------------------------------------
+Copy the code in a local directory and run nestor.sh
+
+
+DEPENDENCIES
+------------------------------------------
+python >= 2.7
 Pillow
 python-tk
 python-imaging-tk
-xautomation
+xte (to simulate key presses)
 
-
-Allowing user to write to /dev/uinput
+LICENSE
 ------------------------------------------
-create a new group uinput:
-sudo groupadd -f uinput
-add user to group:
-sudo gpasswd -a <username> uinput
-reboot!
+This software is released under the GNU GPL license (see LICENSE file)
 
-create new udev rule:
-create a file named /etc/udev/rules.d/99-input.rules
-insert the following line
-KERNEL=="uinput", GROUP="uinput", MODE="0660"
-reboot!
 
